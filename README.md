@@ -72,9 +72,43 @@ src/
 		cli/
 			main.py
 			commands.py
+		ingestion/
+			scanner.py
+			loaders/
 		inference/
 			engine.py
 ```
+
+## Local file system scanner
+
+The local file system scanner provides recursive discovery of supported files
+for downstream NLP and inference pipelines. It performs file discovery only and
+does not read or extract content.
+
+### Supported file types
+
+By default, the scanner detects:
+
+- .txt
+- .pdf
+- .md
+- .py
+
+You can override this list by passing a custom list of extensions.
+
+### Example usage
+
+```python
+from cognexia.ingestion.scanner import scan_directory, scan_directory_with_metadata
+
+paths = scan_directory("/path/to/folder")
+metadata = scan_directory_with_metadata("/path/to/folder")
+```
+
+### Notes
+
+- The scanner skips dotfiles and dot-directories by default.
+- Permission errors are logged and do not stop scanning.
 
 ### Run locally
 
