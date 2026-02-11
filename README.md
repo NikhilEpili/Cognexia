@@ -75,6 +75,8 @@ src/
 		ingestion/
 			scanner.py
 			loaders/
+		nlp/
+			preprocessing.py
 		inference/
 			engine.py
 ```
@@ -109,6 +111,32 @@ metadata = scan_directory_with_metadata("/path/to/folder")
 
 - The scanner skips dotfiles and dot-directories by default.
 - Permission errors are logged and do not stop scanning.
+
+- Permission errors are logged and do not stop scanning.
+
+## NLP preprocessing
+
+Basic preprocessing utilities clean and normalize raw text before it is handed
+off to downstream inference logic. This module does not read files or perform
+any embeddings or intent classification.
+
+### Example usage
+
+```python
+from cognexia.nlp.preprocessing import preprocess_text
+
+cleaned = preprocess_text(
+	"  Hello, World!  ",
+	remove_punctuation=True,
+	remove_stopwords=False,
+)
+```
+
+### Options
+
+- `lowercase`: Lowercase text (default True)
+- `remove_punctuation`: Remove punctuation (default False)
+- `remove_stopwords`: Remove common stopwords (default False)
 
 ### Run locally
 
