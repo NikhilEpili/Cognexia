@@ -1,16 +1,17 @@
-"""Inference engine stub for Cognexia."""
+"""Inference facade that delegates to the core query handler."""
 
 from __future__ import annotations
 
-MOCK_RESPONSE = "[Cognexia] Inference engine not implemented yet."
+from cognexia.core.query_handler import QueryHandler
+
+_QUERY_HANDLER = QueryHandler()
 
 
-def handle_query(query: str) -> str:
-    """Central query execution stub.
+def handle_query(query: str) -> list[tuple[str, float]]:
+    """Stable query execution contract for the CLI layer.
 
-    This function is the stable integration point for future NLP and inference
-    logic. The signature should remain unchanged.
+    Returns:
+        Ranked ``(doc_id, similarity_score)`` tuples.
     """
 
-    _ = query
-    return MOCK_RESPONSE
+    return _QUERY_HANDLER.query(query)

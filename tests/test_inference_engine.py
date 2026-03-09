@@ -11,9 +11,12 @@ from cognexia.inference.engine import handle_query
 
 
 class TestInferenceEngine(unittest.TestCase):
-    def test_handle_query_returns_mock_response(self):
+    def test_handle_query_returns_ranked_results(self):
         response = handle_query("hello")
-        self.assertEqual(response, "[Cognexia] Inference engine not implemented yet.")
+        self.assertIsInstance(response, list)
+        for item in response:
+            self.assertIsInstance(item, tuple)
+            self.assertEqual(len(item), 2)
 
 
 if __name__ == "__main__":
